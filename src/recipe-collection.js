@@ -28,7 +28,9 @@ function addRecipe(recipe) {
   // Add the recipe to the recipeCollection array
   // Return true to indicate success
 
-  // YOUR CODE HERE
+  recipeCollection.push(recipe);
+
+  return true;
 }
 
 /**
@@ -48,7 +50,11 @@ const findRecipe = (name) => {
   // Return the found recipe or undefined if not found
   // This should be written as an arrow function
 
-  // YOUR CODE HERE
+  if (recipeCollection.find(recipe => recipe.name === name)) {
+    return recipeCollection.find(recipe => recipe.name === name);
+  } else {
+    return undefined;
+  }
 };
 
 /**
@@ -67,7 +73,8 @@ function getQuickRecipes(maxTime = 30) {
   // Return the filtered array
   // The function has a default parameter of 30 minutes
 
-  // YOUR CODE HERE
+  let recMin = recipeCollection.filter(recipe => recipe.cookingTime <= maxTime);
+  return recMin;
 }
 
 /**
@@ -83,7 +90,8 @@ function clearRecipes() {
   // CHALLENGE 8: Clear the recipe collection
   // Reset the recipeCollection to an empty array
 
-  // YOUR CODE HERE
+  recipeCollection = [];
+
 }
 
 /* c8 ignore start */

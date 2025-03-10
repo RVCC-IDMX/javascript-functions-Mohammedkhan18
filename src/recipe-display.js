@@ -24,7 +24,8 @@ const timePerServing = recipe => {
   // Create a concise arrow function (with implicit return)
   // that divides the recipe's cookingTime by its servings
 
-  // YOUR CODE HERE
+  const timePerS = recipe.cookingTime / recipe.servings;
+  return timePerS;
 };
 
 /**
@@ -44,7 +45,22 @@ const getStepsList = (recipe) => {
   // Add a newline character (\n) after each step
   // Return the formatted string
 
-  // YOUR CODE HERE
+
+  if (!recipe.steps || recipe.steps.length === 0) {
+    return "No steps added yet";
+  }
+
+  let sList = '';
+
+  for (let i = 0; i < recipe.steps.length; i++) {
+    sList += `${i + 1}. ${recipe.steps[i]}\n`;
+
+  }
+
+  return sList.trim();
+
+
+
 };
 
 /**
@@ -65,7 +81,16 @@ const getIngredientsList = (recipe) => {
   // Add a newline character (\n) after each ingredient
   // Return the formatted string
 
-  // YOUR CODE HERE
+  if (!recipe.ingredients || recipe.ingredients.length === 0) {
+    return "No ingredients added yet";
+  }
+
+  let iList = '';
+  for (const ingredient of recipe.ingredients) {
+    iList += `- ${ingredient.amount} ${ingredient.unit} of ${ingredient.name}\n`;
+  }
+
+  return iList.trim();
 };
 
 /**
@@ -85,8 +110,13 @@ function formatRecipe(recipe) {
   // Include sections for ingredients and steps
   // Use template literals (backticks) for multi-line formatting
   // Return the complete formatted string
+  const timeServing = timePerServing(recipe);
+  const ingrList = getIngredientsList(recipe);
+  const stpsList = getStepsList(recipe);
 
-  // YOUR CODE HERE
+  return `
+${recipe.name} \nfor ${recipe.servings} people\nCooking time: ${recipe.cookingTime} minutes\nTime per serving: ${timeServing.toFixed(1)} minutes\nIngredients: \n${ingrList} \nSteps: \n${stpsList}`
+
 }
 
 /* c8 ignore start */
